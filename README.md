@@ -1,12 +1,12 @@
-# Coetrappers AI Chatbot
+# Codetrappers AI Chatbot
 
-`coetrappers-ai-chatbot` is a ai-enabled wordpress plugin for the Coetrappers project set.
+`codetrappers-ai-chatbot` is a ai-enabled wordpress plugin for the Codetrappers project set.
 Starter AI chatbot plugin with a basic shortcode and provider abstraction.
 The codebase is scaffolded to be a clean starting point, not a complete production feature.
 
 ## Project Summary
 
-- Slug: `coetrappers-ai-chatbot`
+- Slug: `codetrappers-ai-chatbot`
 - Type: AI-enabled WordPress plugin
 - Focus: ai, chatbot, shortcode
 
@@ -32,8 +32,8 @@ The codebase is scaffolded to be a clean starting point, not a complete producti
 
 ## How To Extend It
 
-- Activate `coetrappers-ai-chatbot` from the Plugins screen.
-- Use `coetrappers-ai-chatbot.php` as the primary bootstrap file for extension work.
+- Activate `codetrappers-ai-chatbot` from the Plugins screen.
+- Use `codetrappers-ai-chatbot.php` as the primary bootstrap file for extension work.
 - Keep feature logic inside dedicated classes rather than expanding the root file.
 
 ## Development Notes

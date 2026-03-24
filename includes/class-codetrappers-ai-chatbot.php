@@ -1,25 +1,25 @@
 <?php
-namespace Coetrappers\CoetrappersAiChatbot;
+namespace Codetrappers\CodetrappersAiChatbot;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class CoetrappersAiChatbotPlugin {
-	const OPTION_KEY = 'coetrappers-ai-chatbot_settings';
+class CodetrappersAiChatbotPlugin {
+	const OPTION_KEY = 'codetrappers-ai-chatbot_settings';
 
 	public function boot() {
 		add_action( 'init', array( $this, 'register_post_meta' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_notices', array( $this, 'render_admin_notice' ) );
         add_action( 'admin_menu', array( $this, 'register_ai_page' ) );
-        add_action( 'admin_post_coetrappers_ai_chatbot_generate', array( $this, 'handle_generation' ) );
+        add_action( 'admin_post_codetrappers_ai_chatbot_generate', array( $this, 'handle_generation' ) );
 	}
 
 	public function register_post_meta() {
 		register_post_meta(
 			'',
-			'_coetrappers-ai-chatbot_status',
+			'_codetrappers-ai-chatbot_status',
 			array(
 				'show_in_rest'      => true,
 				'single'            => true,
@@ -35,7 +35,7 @@ class CoetrappersAiChatbotPlugin {
 	public function register_settings() {
 		register_setting(
 			'general',
-			'coetrappers-ai-chatbot_settings',
+			'codetrappers-ai-chatbot_settings',
 			array(
 				'type'              => 'array',
 				'sanitize_callback' => array( $this, 'sanitize_settings' ),
@@ -77,7 +77,7 @@ class CoetrappersAiChatbotPlugin {
 
 		$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
 
-		if ( ! $screen || 'settings_page_coetrappers-ai-chatbot' === $screen->id ) {
+		if ( ! $screen || 'settings_page_codetrappers-ai-chatbot' === $screen->id ) {
 			return;
 		}
 
@@ -89,17 +89,17 @@ class CoetrappersAiChatbotPlugin {
 
 		printf(
 			'<div class="notice notice-info"><p>%s</p></div>',
-			esc_html__( 'Coetrappers AI Chatbot starter is active. Extend the bootstrap logic in includes/class-coetrappers-ai-chatbot.php.', 'coetrappers-ai-chatbot' )
+			esc_html__( 'Codetrappers AI Chatbot starter is active. Extend the bootstrap logic in includes/class-codetrappers-ai-chatbot.php.', 'codetrappers-ai-chatbot' )
 		);
 	}
 
     public function register_ai_page() {
         add_submenu_page(
             'options-general.php',
-            __( 'Coetrappers AI Chatbot', 'coetrappers-ai-chatbot' ),
-            __( 'Coetrappers AI Chatbot', 'coetrappers-ai-chatbot' ),
+            __( 'Codetrappers AI Chatbot', 'codetrappers-ai-chatbot' ),
+            __( 'Codetrappers AI Chatbot', 'codetrappers-ai-chatbot' ),
             'manage_options',
-            'coetrappers-ai-chatbot',
+            'codetrappers-ai-chatbot',
             array( $this, 'render_ai_page' )
         );
     }
@@ -109,19 +109,19 @@ class CoetrappersAiChatbotPlugin {
             return;
         }
 
-        $output = get_transient( 'coetrappers-ai-chatbot_last_output' );
+        $output = get_transient( 'codetrappers-ai-chatbot_last_output' );
         ?>
         <div class="wrap">
-            <h1><?php echo esc_html__( 'Coetrappers AI Chatbot', 'coetrappers-ai-chatbot' ); ?></h1>
-            <p><?php echo esc_html__( 'This starter page wires WordPress admin UI to a replaceable AI provider.', 'coetrappers-ai-chatbot' ); ?></p>
+            <h1><?php echo esc_html__( 'Codetrappers AI Chatbot', 'codetrappers-ai-chatbot' ); ?></h1>
+            <p><?php echo esc_html__( 'This starter page wires WordPress admin UI to a replaceable AI provider.', 'codetrappers-ai-chatbot' ); ?></p>
             <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-                <?php wp_nonce_field( 'coetrappers-ai-chatbot_generate' ); ?>
-                <input type="hidden" name="action" value="coetrappers_ai_chatbot_generate" />
-                <textarea name="prompt" class="large-text code" rows="8" placeholder="<?php echo esc_attr__( 'Enter a prompt or source content.', 'coetrappers-ai-chatbot' ); ?>"></textarea>
-                <p><button type="submit" class="button button-primary"><?php echo esc_html__( 'Generate', 'coetrappers-ai-chatbot' ); ?></button></p>
+                <?php wp_nonce_field( 'codetrappers-ai-chatbot_generate' ); ?>
+                <input type="hidden" name="action" value="codetrappers_ai_chatbot_generate" />
+                <textarea name="prompt" class="large-text code" rows="8" placeholder="<?php echo esc_attr__( 'Enter a prompt or source content.', 'codetrappers-ai-chatbot' ); ?>"></textarea>
+                <p><button type="submit" class="button button-primary"><?php echo esc_html__( 'Generate', 'codetrappers-ai-chatbot' ); ?></button></p>
             </form>
             <?php if ( ! empty( $output ) ) : ?>
-                <h2><?php echo esc_html__( 'Latest Output', 'coetrappers-ai-chatbot' ); ?></h2>
+                <h2><?php echo esc_html__( 'Latest Output', 'codetrappers-ai-chatbot' ); ?></h2>
                 <pre style="white-space: pre-wrap;"><?php echo esc_html( $output ); ?></pre>
             <?php endif; ?>
         </div>
@@ -130,17 +130,17 @@ class CoetrappersAiChatbotPlugin {
 
     public function handle_generation() {
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_die( esc_html__( 'You are not allowed to perform this action.', 'coetrappers-ai-chatbot' ) );
+            wp_die( esc_html__( 'You are not allowed to perform this action.', 'codetrappers-ai-chatbot' ) );
         }
 
-        check_admin_referer( 'coetrappers-ai-chatbot_generate' );
+        check_admin_referer( 'codetrappers-ai-chatbot_generate' );
 
         $prompt = isset( $_POST['prompt'] ) ? sanitize_textarea_field( wp_unslash( $_POST['prompt'] ) ) : '';
         $result = $this->generate_placeholder_response( $prompt );
 
-        set_transient( 'coetrappers-ai-chatbot_last_output', $result, HOUR_IN_SECONDS );
+        set_transient( 'codetrappers-ai-chatbot_last_output', $result, HOUR_IN_SECONDS );
 
-        wp_safe_redirect( admin_url( 'options-general.php?page=coetrappers-ai-chatbot' ) );
+        wp_safe_redirect( admin_url( 'options-general.php?page=codetrappers-ai-chatbot' ) );
         exit;
     }
 
@@ -148,11 +148,11 @@ class CoetrappersAiChatbotPlugin {
         $trimmed_prompt = trim( (string) $prompt );
 
         if ( '' === $trimmed_prompt ) {
-            return __( 'No prompt was provided. Replace this placeholder with an actual AI provider call.', 'coetrappers-ai-chatbot' );
+            return __( 'No prompt was provided. Replace this placeholder with an actual AI provider call.', 'codetrappers-ai-chatbot' );
         }
 
         return sprintf(
-            __( 'Placeholder response for: %s', 'coetrappers-ai-chatbot' ),
+            __( 'Placeholder response for: %s', 'codetrappers-ai-chatbot' ),
             $trimmed_prompt
         );
     }

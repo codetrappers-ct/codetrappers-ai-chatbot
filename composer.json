@@ -1,5 +1,5 @@
 {
-  "name": "coetrappers/coetrappers-ai-chatbot",
+  "name": "codetrappers/codetrappers-ai-chatbot",
   "description": "Starter AI chatbot plugin with a basic shortcode and provider abstraction.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
@@ -8,7 +8,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Coetrappers\\\\CoetrappersAiChatbot\\\\": "includes/"
+      "Codetrappers\\\\CodetrappersAiChatbot\\\\": "includes/"
     }
   }
 }
